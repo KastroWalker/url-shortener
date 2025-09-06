@@ -1,14 +1,7 @@
 {
-    "watch": [
-        "src",
-        ".env.local",
-        ".env"
-    ],
+    "watch": ["src", ".env.local", ".env"],
     "ext": "ts,js,json",
-    "ignore": [
-        "dist",
-        "node_modules"
-    ],
+    "ignore": ["dist", "node_modules"],
     "exec": "export $(cat .env.local | grep \"^[^#;]\" |xargs); tsx src/index.ts",
     "env": {
         "NODE_ENV": "local"
