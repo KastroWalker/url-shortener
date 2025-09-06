@@ -1,0 +1,32 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Encurtador de URL com suporte a planos **Free** e **Pago**, redirecionamento inteligente e painel de administração para gerenciamento de links.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KastroWalker/url-shortener.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KastroWalker/url-shortener/issues"
+  },
+  "homepage": "https://github.com/KastroWalker/url-shortener#readme",
+  "dependencies": {
+    "fastify": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.2"
+  }
+}
