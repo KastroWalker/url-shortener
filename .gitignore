@@ -124,9 +124,6 @@ Thumbs.db
 *.sqlite3
 *.db
 
-# Prisma
-prisma/migrations/
-
 # PM2
 .pm2
 
@@ -153,3 +150,4 @@ coverage/
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install
+/src/generated/prisma
