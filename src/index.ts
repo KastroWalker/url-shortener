@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import { SERVER_PORT } from './config/envs'
+import { SERVER_HOST, SERVER_PORT } from './config/envs'
 
 const server = fastify()
 
@@ -8,7 +8,7 @@ server.get('/health', async (request, reply) => {
 })
 
 if (process.env.NODE_ENV !== 'test') {
-  server.listen({ port: SERVER_PORT }, (err, address) => {
+  server.listen({ host: SERVER_HOST, port: SERVER_PORT }, (err, address) => {
     if (err) {
       console.error(err)
       process.exit(1)
