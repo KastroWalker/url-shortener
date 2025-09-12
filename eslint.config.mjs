@@ -1,9 +1,16 @@
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+
 export default [
     {
         files: ['**/*.ts'],
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
+            parser: tsParser,
+        },
+        plugins: {
+            '@typescript-eslint': tseslint,
         },
         rules: {
             'no-unused-vars': 'warn',
