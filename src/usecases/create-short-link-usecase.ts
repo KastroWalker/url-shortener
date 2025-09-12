@@ -11,24 +11,28 @@ export interface CreateShortLinkOutput {
 
 class CreateShortLinkUseCase {
     async execute(input: CreateShortLinkInput): Promise<CreateShortLinkOutput> {
-        let shortCode = this.generateShortCode()
+        const MAX_ATTEMPTS = 10
 
-        while (await linkRepository.findByShortCode(shortCode) != null) {
-            shortCode = this.generateShortCode()
-        }
+        for(let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+            const shortCode = this.generateShortCode()
 
-        const link = {
-            id: randomUUID(),
-            originalUrl: input.originalUrl,
-            shortCode: shortCode,
-            clicks: 0,
-        }
+            if(!(await linkRepository.findByShortCode(shortCode))) {
+                const link = {
+                    id: randomUUID(),
+                    originalUrl: input.originalUrl,
+                    shortCode: shortCode,
+                    clicks: 0,
+                }
+                
+                const response = await linkRepository.create(link)
         
-        const response = await linkRepository.create(link)
-
-        return { 
-            shortUrl: `https://short.cut/${response.shortCode}` 
+                return { 
+                    shortUrl: `https://short.cut/${response.shortCode}` 
+                }
+            }
         }
+
+        throw new Error("Internal Server Error");
     }
 
     private generateShortCode() {
