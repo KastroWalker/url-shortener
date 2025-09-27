@@ -1,11 +1,9 @@
-// Quando enviar uma url válida ele deve retornar 201 created
-// Quando enviar um payload inválido deve retornar 400
 // Quando já existir um valor no banco com o mesmo shortLink deve recriar um novo
 // Quando der um erro interno, deve retornar error 500
 
-import server from "../src"
+import server from "../../src"
 import orchestrator from "./orchestrator";
-import { db } from '../src/database'
+import { db } from '../../src/database'
 import { validate as uuidValidate } from 'uuid';
 
 describe('Link Controller Tests', () => {
@@ -45,5 +43,39 @@ describe('Link Controller Tests', () => {
         expect(newLink.original_url).toBe(originalUrl)
         expect(new Date(newLink.created_at)).not.toBe(NaN)
         expect(new Date(newLink.updated_at)).not.toBe(NaN)
+    })
+
+    it('Should return 400 when POST /links with invalid payload', async () => {
+        const response = await server.inject({
+            method: 'POST',
+            url: '/links',
+            body: { invalidPayload: 'test' }
+        })
+
+        expect(response.statusCode).toBe(400)
+        expect(response.body).toBe(JSON.stringify({
+            "name": "BadRequest",
+            "message": "Payload inválido.",
+            "action": "Ajuste os dados enviados e tente novamente.",
+            "status_code": 400
+        }))
+        console.log(response.body)
+    })
+
+    it('Should return 400 when POST /links with invalid URL format', async () => {
+        const response = await server.inject({
+            method: 'POST',
+            url: '/links',
+            body: { originalUrl: 'test' }
+        })
+
+        expect(response.statusCode).toBe(400)
+        expect(response.body).toBe(JSON.stringify({
+            "name": "BadRequest",
+            "message": "Payload inválido.",
+            "action": "Ajuste os dados enviados e tente novamente.",
+            "status_code": 400
+        }))
+        console.log(response.body)
     })
 })

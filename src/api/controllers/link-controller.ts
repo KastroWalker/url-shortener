@@ -11,8 +11,11 @@ interface CreateShortLinkResponse {
 }
 
 class LinkController {
-    async createShortLink(req: FastifyRequest, rep: FastifyReply) {
-        const body = req.body as CreateShortLinkRequest 
+    async createShortLink(
+        req: FastifyRequest<{ Body: CreateShortLinkRequest }>, 
+        rep: FastifyReply
+    ) {
+        const body = req.body as CreateShortLinkRequest
 
         const createShortLinkInput = body as CreateShortLinkInput
         const newLink = await createShortLinkUseCase.execute(createShortLinkInput)

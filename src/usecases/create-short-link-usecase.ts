@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto'
 import linkRepository from '../repositories/link-repository'
+import { ServiceError } from '../errors'
 
 export interface CreateShortLinkInput {
     originalUrl: string
@@ -32,7 +33,7 @@ class CreateShortLinkUseCase {
             }
         }
 
-        throw new Error("Internal Server Error");
+        throw new ServiceError("Erro ao gerar código da URL.");
     }
 
     private generateShortCode() {
