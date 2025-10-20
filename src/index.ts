@@ -5,6 +5,10 @@ import errorHandler from './api/handlers/error-handler';
 
 const server = fastify();
 
+server.register(import('@fastify/cors'), {
+    origin: true
+})
+
 server.setErrorHandler(errorHandler)
 
 server.get('/health', async (request, reply) => {
