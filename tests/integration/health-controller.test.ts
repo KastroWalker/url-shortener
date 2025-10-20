@@ -1,4 +1,4 @@
-import server from '../src/index';
+import server from '../../src/index';
 
 describe('Health Tests', () => {
     beforeAll(async () => {

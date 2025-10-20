@@ -3,7 +3,7 @@ export default {
     preset: 'ts-jest/presets/default-esm',
     testEnvironment: 'node',
     testMatch: ['**/tests/**/*.test.ts', '**/tests/**/*.spec.ts'],
-    setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+    setupFilesAfterEnv: ['<rootDir>/tests/integration/setup.ts'],
     verbose: true,
     extensionsToTreatAsEsm: ['.ts'],
     transform: {
